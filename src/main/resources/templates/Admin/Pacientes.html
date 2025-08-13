@@ -1,0 +1,32 @@
+<div th:fragment="pacientesFragment" class="card shadow-sm p-4">
+    <h4 class="text-primary mb-3">Lista de Pacientes Registrados</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${pacientes}">
+            <td th:text="${p.nombre}">Nombre</td>
+            <td th:text="${p.apellidos}">Apellidos</td>
+            <td th:text="${p.dni}">DNI</td>
+            <td th:text="${p.telefono}">Teléfono</td>
+            <td th:text="${p.email}">Correo</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-warning me-1"
+                   th:onclick="'cargarVista(\'EditarPaciente?id=' + ${p.id} + '\')'">Editar</a>
+
+                <a href="#" class="btn btn-sm btn-danger"
+                   th:onclick="'if(confirm(\'¿Eliminar este paciente?\')) cargarVista(\'EliminarPaciente?id=' + ${p.id} + '\')'">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
