@@ -106,7 +106,7 @@ public class AdminController {
     }
 
     @PostMapping("/CrearMedico")
-    public String CrearMedico(@ModelAttribute MedicoUsuarioDTO medicoUsuarioDTO, BindingResult bindingResult, Model model) {
+    public String CrearMedico(@ModelAttribute MedicoUsuarioDTO medicoUsuarioDTO, Model model) {
         model.addAttribute("medico", medicoUsuarioDTO);
 
         Usuario usuario = new Usuario();
@@ -115,21 +115,6 @@ public class AdminController {
         usuario.setRol(Usuario.RolType.Medico);
         usuario.setUsername(medicoUsuarioDTO.getUsername());
         usuario.setPassword(medicoUsuarioDTO.getPassword());
-        // Verificar si el correo ya existe
-        if (medicoService.existePorEmail(usuario.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Este correo ya está registrado.");
-        }
-
-        // Verificar si el usuario ya existe
-        if (usuarioService.existePorUsername(usuario.getUsername())) {
-            bindingResult.rejectValue("username", "error.username", "Este usuario ya existe.");
-        }
-
-        // Si hay errores, retornar al formulario
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("isEdit", false);
-            return "admin/formMedico"; // tu vista Thymeleaf
-        }
 
         if(!usuarioService.validarUsuario(usuario, model, false)) {
             model.addAttribute("medico", medicoUsuarioDTO);
