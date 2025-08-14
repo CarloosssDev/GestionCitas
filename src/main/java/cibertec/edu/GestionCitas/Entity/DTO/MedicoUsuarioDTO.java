@@ -1,12 +1,11 @@
 package cibertec.edu.GestionCitas.Entity.DTO;
 
-
 import cibertec.edu.GestionCitas.Entity.Usuario;
 import cibertec.edu.GestionCitas.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
-public class PacienteUsuarioDTO {
+public class MedicoUsuarioDTO {
     @Autowired
     private UsuarioService usuarioService;
 
@@ -14,13 +13,11 @@ public class PacienteUsuarioDTO {
 
     private String nombre;
 
-    private String apellidos;
-
-    private String dni;
-
-    private String email;
+    private String especialidad;
 
     private String telefono;
+
+    private String email;
 
     private Long usuarioId;
 
@@ -28,7 +25,17 @@ public class PacienteUsuarioDTO {
 
     private String password;
 
-    public PacienteUsuarioDTO() {
+    public MedicoUsuarioDTO() { }
+
+    public MedicoUsuarioDTO(Long id, String nombre, String especialidad, String telefono, String email, Long usuarioId, String username, String password) {
+        this.id = id;
+        this.nombre = nombre;
+        this.especialidad = especialidad;
+        this.telefono = telefono;
+        this.email = email;
+        this.usuarioId = usuarioId;
+        this.username = username;
+        this.password = password;
     }
 
     public Long getId() {
@@ -47,28 +54,12 @@ public class PacienteUsuarioDTO {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 
     public String getTelefono() {
@@ -77,6 +68,14 @@ public class PacienteUsuarioDTO {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getUsuarioId() {

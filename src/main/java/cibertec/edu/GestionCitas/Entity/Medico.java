@@ -40,6 +40,15 @@ public class Medico {
     public Medico() {
     }
 
+    public Medico(Long id, String nombre, String especialidad, String telefono, String email, Usuario usuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.especialidad = especialidad;
+        this.telefono = telefono;
+        this.email = email;
+        this.usuario = usuario;
+    }
+
     public Medico(Long id, String nombre, String especialidad, String telefono, String email, Usuario usuario, List<Cita> citas, List<Historial> historiales) {
         this.id = id;
         this.nombre = nombre;

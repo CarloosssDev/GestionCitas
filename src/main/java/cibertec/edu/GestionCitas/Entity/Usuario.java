@@ -44,6 +44,15 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(Long id, String nombre, String email, RolType rol, String username, String password) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.rol = rol;
+        this.username = username;
+        this.password = password;
+    }
+
     public Usuario(Long id, String nombre, String email, RolType rol, String username, String password, List<Medico> medicos, List<Paciente> pacientes) {
         this.id = id;
         this.nombre = nombre;

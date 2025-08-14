@@ -28,3 +28,11 @@ function cargarVista(folder, nombreVista) {
             document.getElementById("contenido-dinamico").innerHTML = html; // Inserta la vista en el contenedor
         });
 }
+function confirmarYEnviar(event, formId) {
+    if (!confirm("¿Seguro de eliminarlo?")) {
+        return false;
+    }
+    enviarFormularioParcial(event, formId);
+    return false; // Previene el envío normal
+}
+

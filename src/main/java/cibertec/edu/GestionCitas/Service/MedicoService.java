@@ -22,6 +22,9 @@ public class MedicoService {
         }
         return medicoRepository.save(medico);
     }
+    public List<Medico> listarMedicos() {
+        return (List<Medico>) medicoRepository.findAll();
+    }
 
     public Medico actualizarMedico(Medico medico) {
         Optional<Medico> objMedico = medicoRepository.findById(medico.getId());
@@ -35,10 +38,13 @@ public class MedicoService {
         return medicoRepository.save(medicoActualizado);
     }
 
-    public List<Medico> listarMedicos() {
-        return (List<Medico>) medicoRepository.findAll();
+    public Boolean eliminarMedico(Long id) {
+        if(medicoRepository.existsById(id)) {
+            medicoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
-
 
     public Boolean existePorEmail(String Email) {
         return medicoRepository.existsByEmail(Email);
@@ -46,6 +52,14 @@ public class MedicoService {
 
     public Medico obtenerPorUsuarioId(Long Id) {
         return medicoRepository.findByUsuarioId(Id);
+    }
+
+    public Medico obtenerPorId(Long Id){
+        Optional<Medico> medico = medicoRepository.findById(Id);
+        if (medico.isEmpty()){
+            throw new IllegalArgumentException("No existe");
+        }
+        return medico.get();
     }
 
 }

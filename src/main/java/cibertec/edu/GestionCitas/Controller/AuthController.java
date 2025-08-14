@@ -37,16 +37,15 @@ public class AuthController {
         }
         switch (usuario.getRol()) {
             case Admin:
+                httpSession.setAttribute("usuario", usuario);
                 return "redirect:/Admin";
             case Medico:
                 Medico medico = medicoService.obtenerPorUsuarioId(usuario.getId());
                 httpSession.setAttribute("medico", medico);
-                System.out.println(medico);
                 return "redirect:/Medico";
             case Paciente:
                 Paciente paciente = pacienteService.obtenerPorUsuarioId(usuario.getId());
                 httpSession.setAttribute("paciente", paciente);
-                System.out.println(paciente);
                 return "redirect:/Paciente/Panel";
         }
         return "Auth/Acceder";
@@ -60,16 +59,14 @@ public class AuthController {
 
     @PostMapping("/Registrar")
     public String Registrar(@ModelAttribute PacienteUsuarioDTO pacienteUsuarioDTO, Model model) {
+        model.addAttribute("paciente", pacienteUsuarioDTO);
         if(usuarioService.existePorEmail(pacienteUsuarioDTO.getEmail())) {
-            model.addAttribute("paciente", pacienteUsuarioDTO);
             model.addAttribute("mensaje", "El email ya está registrado");
             return "Auth/Registrar";
         } else if (usuarioService.existePorUsername(pacienteUsuarioDTO.getUsername())) {
-            model.addAttribute("paciente", pacienteUsuarioDTO);
             model.addAttribute("mensaje", "El usuario ya está registrado");
             return "Auth/Registrar";
         } else if (pacienteService.existePorDni(pacienteUsuarioDTO.getDni())) {
-            model.addAttribute("paciente", pacienteUsuarioDTO);
             model.addAttribute("mensaje", "El DNI ya está registrado");
             return "Auth/Registrar";
         }
