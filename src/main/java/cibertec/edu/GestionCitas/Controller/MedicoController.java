@@ -3,7 +3,6 @@ import cibertec.edu.GestionCitas.Entity.*;
 import cibertec.edu.GestionCitas.Service.CitaService;
 import cibertec.edu.GestionCitas.Service.HistorialService;
 import cibertec.edu.GestionCitas.Service.MedicoService;
-import cibertec.edu.GestionCitas.Service.PacienteService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,6 @@ public class MedicoController {
     private CitaService citaService;
     @Autowired
     private HistorialService historialService;
-    @Autowired
-    private PacienteService pacienteService;
 
     @GetMapping()
     public String MostrarPanel(HttpSession httpSession, Model model) {

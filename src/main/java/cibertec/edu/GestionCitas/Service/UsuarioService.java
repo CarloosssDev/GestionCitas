@@ -1,7 +1,5 @@
 package cibertec.edu.GestionCitas.Service;
 
-import cibertec.edu.GestionCitas.Entity.Medico;
-import cibertec.edu.GestionCitas.Entity.Paciente;
 import cibertec.edu.GestionCitas.Entity.Usuario;
 import cibertec.edu.GestionCitas.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

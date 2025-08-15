@@ -1,13 +1,6 @@
 package cibertec.edu.GestionCitas.Entity.DTO;
 
-import cibertec.edu.GestionCitas.Entity.Usuario;
-import cibertec.edu.GestionCitas.Service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-
 public class MedicoUsuarioDTO {
-    @Autowired
-    private UsuarioService usuarioService;
 
     private Long id;
 
