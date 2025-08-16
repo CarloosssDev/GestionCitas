@@ -1,6 +1,6 @@
-<div th:fragment="formPacienteFragment" class="card shadow-sm p-4">
+<div th:fragment="editarPacienteFragment" class="card shadow-sm p-4">
     <h4 class="mb-4 text-primary">Editar Paciente</h4>
-
+    <div th:if="${mensaje}" class="alert alert-warning" th:text="${mensaje}"></div>
     <form id="form-paciente"
           th:action="@{/Admin/EditarPaciente}"
           method="post"
@@ -8,7 +8,7 @@
           th:object="${paciente}">
 
         <input type="hidden" th:field="*{id}" />
-        <input type="hidden" th:field="*{usuario.id}" />
+        <input type="hidden" th:field="*{usuarioId}" />
 
         <div class="mb-3">
             <label class="form-label" for="nombre">Nombre</label>
@@ -45,13 +45,13 @@
         <div class="mb-3">
             <label class="form-label" for="username">Nombre de Usuario</label>
             <input type="text" th:field="*{username}" class="form-control" required />
-            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{nombreUsuario}"></div>
+            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="password">Contraseña</label>
-            <input type="password" th:field="*{contraseña}" class="form-control" required />
-            <div class="text-danger" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></div>
+            <input type="password" th:field="*{password}" class="form-control" required />
+            <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         </div>
 
         <div class="d-flex justify-content-end gap-2">

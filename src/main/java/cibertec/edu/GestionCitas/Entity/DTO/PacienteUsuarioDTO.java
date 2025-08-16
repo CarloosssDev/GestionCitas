@@ -23,6 +23,18 @@ public class PacienteUsuarioDTO {
     public PacienteUsuarioDTO() {
     }
 
+    public PacienteUsuarioDTO(Long id, String nombre, String apellidos, String dni, String email, String telefono, Long usuarioId, String username, String password) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.email = email;
+        this.telefono = telefono;
+        this.usuarioId = usuarioId;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

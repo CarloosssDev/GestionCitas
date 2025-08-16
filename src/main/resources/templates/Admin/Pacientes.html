@@ -1,6 +1,9 @@
 <div th:fragment="pacientesFragment" class="card shadow-sm p-4">
     <h4 class="text-primary mb-3">Lista de Pacientes Registrados</h4>
 
+    <div th:if="${eliminado}" class="alert alert-success" th:text="${eliminado}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -20,11 +23,16 @@
             <td th:text="${p.telefono}">Teléfono</td>
             <td th:text="${p.email}">Correo</td>
             <td>
-                <a href="#" class="btn btn-sm btn-warning me-1"
-                   th:onclick="'cargarVista(\'EditarPaciente?id=' + ${p.id} + '\')'">Editar</a>
-
-                <a href="#" class="btn btn-sm btn-danger"
-                   th:onclick="'if(confirm(\'¿Eliminar este paciente?\')) cargarVista(\'EliminarPaciente?id=' + ${p.id} + '\')'">Eliminar</a>
+                <form id="delete-paciente"
+                      th:action="|Admin/EliminarPaciente/${p.id}|"
+                      method="post"
+                      onsubmit="return confirmarYEnviar(event, 'delete-paciente')">
+                    <button type="button" class="btn btn-sm btn-warning me-1"
+                            th:onclick="|cargarVista('Admin', 'EditarPaciente/${p.id}')|">
+                        Editar
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-danger"> Eliminar </button>
+                </form>
             </td>
         </tr>
         </tbody>

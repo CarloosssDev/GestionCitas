@@ -1,11 +1,9 @@
 package cibertec.edu.GestionCitas.Service;
 
-import cibertec.edu.GestionCitas.Entity.Cita;
-import cibertec.edu.GestionCitas.Entity.Paciente;
+import cibertec.edu.GestionCitas.Entity.*;
 import cibertec.edu.GestionCitas.Repository.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

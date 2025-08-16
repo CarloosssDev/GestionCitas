@@ -44,6 +44,18 @@ public class PacienteService {
         return (List<Paciente>) pacienteRepository.findAll();
     }
 
+    public Boolean eliminarPaciente(Long id) {
+        if(pacienteRepository.existsById(id)) {
+            pacienteRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public Paciente obtenerPorId(Long id){
+        return pacienteRepository.findById(id).orElse(null);
+    }
+
     public Paciente obtenerPorUsuarioId(Long Id) {
         return pacienteRepository.findByUsuarioId(Id);
     }

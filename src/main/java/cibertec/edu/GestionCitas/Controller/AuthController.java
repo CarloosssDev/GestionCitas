@@ -1,12 +1,8 @@
 package cibertec.edu.GestionCitas.Controller;
 
 import cibertec.edu.GestionCitas.Entity.DTO.PacienteUsuarioDTO;
-import cibertec.edu.GestionCitas.Entity.Medico;
-import cibertec.edu.GestionCitas.Entity.Paciente;
-import cibertec.edu.GestionCitas.Entity.Usuario;
-import cibertec.edu.GestionCitas.Service.MedicoService;
-import cibertec.edu.GestionCitas.Service.PacienteService;
-import cibertec.edu.GestionCitas.Service.UsuarioService;
+import cibertec.edu.GestionCitas.Entity.*;
+import cibertec.edu.GestionCitas.Service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

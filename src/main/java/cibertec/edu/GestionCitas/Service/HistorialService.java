@@ -4,7 +4,6 @@ import cibertec.edu.GestionCitas.Entity.Historial;
 import cibertec.edu.GestionCitas.Repository.HistorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 

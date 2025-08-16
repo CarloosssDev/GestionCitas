@@ -1,7 +1,6 @@
 package cibertec.edu.GestionCitas.Repository;
 
-import cibertec.edu.GestionCitas.Entity.Cita;
-import cibertec.edu.GestionCitas.Entity.Paciente;
+import cibertec.edu.GestionCitas.Entity.*;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

@@ -47,6 +47,17 @@ public class Paciente {
     public Paciente() {
     }
 
+    public Paciente(Long id, String nombre, String apellidos, String dni, String email, String telefono, String username, Usuario usuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.email = email;
+        this.telefono = telefono;
+        this.username = username;
+        this.usuario = usuario;
+    }
+
     public Paciente(Long id, String nombre, String apellidos, String dni, String email, String telefono, String username, Usuario usuario, List<Cita> citas, List<Historial> historiales) {
         this.id = id;
         this.nombre = nombre;

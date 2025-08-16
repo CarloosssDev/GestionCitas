@@ -1,12 +1,8 @@
 package cibertec.edu.GestionCitas.Controller;
 
-import cibertec.edu.GestionCitas.Entity.DTO.MedicoUsuarioDTO;
-import cibertec.edu.GestionCitas.Entity.DTO.PacienteUsuarioDTO;
-import cibertec.edu.GestionCitas.Entity.Medico;
-import cibertec.edu.GestionCitas.Entity.Usuario;
-import cibertec.edu.GestionCitas.Service.MedicoService;
-import cibertec.edu.GestionCitas.Service.PacienteService;
-import cibertec.edu.GestionCitas.Service.UsuarioService;
+import cibertec.edu.GestionCitas.Entity.DTO.*;
+import cibertec.edu.GestionCitas.Entity.*;
+import cibertec.edu.GestionCitas.Service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -165,6 +161,7 @@ public class AdminController {
                 medicoUsuarioDTO.getUsername(),
                 medicoUsuarioDTO.getPassword()
         );
+
         if(!usuarioService.validarUsuario(usuario, model, true)) {
             model.addAttribute("medico", medicoUsuarioDTO);
             return "Admin/FormMedico :: formMedicoFragment";
@@ -190,7 +187,7 @@ public class AdminController {
     public String EliminarMedico(@PathVariable Long id, Model model) {
         Medico medico = medicoService.obtenerPorId(id);
         Boolean deleted = usuarioService.elminarUsuario(medico.getUsuario().getId());
-
+        medicoService.eliminarMedico(id);
         if(deleted) {
             model.addAttribute("eliminado", "Se eliminó el médico");
         } else  {
@@ -212,8 +209,70 @@ public class AdminController {
     }
 
     @GetMapping("/EditarPaciente/{id}")
-    public String MostrarEditarPaciente(@ModelAttribute PacienteUsuarioDTO pacienteUsuarioDTO, Model model) {
-        return "";
+    public String MostrarEditarPaciente(@PathVariable Long id, Model model) {
+        Paciente paciente = pacienteService.obtenerPorId(id);
+        Usuario usuario = usuarioService.obtenerPorId(paciente.getUsuario().getId());
+
+        PacienteUsuarioDTO pacienteUsuarioDTO = new PacienteUsuarioDTO(
+                paciente.getId(),
+                paciente.getNombre(),
+                paciente.getApellidos(),
+                paciente.getDni(),
+                paciente.getEmail(),
+                paciente.getTelefono(),
+                usuario.getId(),
+                usuario.getUsername(),
+                usuario.getPassword());
+
+        model.addAttribute("paciente", pacienteUsuarioDTO);
+
+        return "Admin/EditarPaciente :: editarPacienteFragment";
+    }
+
+    @PostMapping("/EditarPaciente")
+    public String EditarPaciente(@ModelAttribute PacienteUsuarioDTO pacienteUsuarioDTO , Model model) {
+        Usuario usuario = new Usuario(
+                pacienteUsuarioDTO.getUsuarioId(),
+                pacienteUsuarioDTO.getNombre(),
+                pacienteUsuarioDTO.getEmail(),
+                Usuario.RolType.Paciente,
+                pacienteUsuarioDTO.getUsername(),
+                pacienteUsuarioDTO.getPassword()
+        );
+
+        if(!usuarioService.validarUsuario(usuario, model, true)) {
+            model.addAttribute("paciente", pacienteUsuarioDTO);
+            return "Admin/EditarPaciente :: editarPacienteFragment";
+        }
+
+        Paciente paciente = new Paciente(
+                pacienteUsuarioDTO.getId(),
+                pacienteUsuarioDTO.getNombre(),
+                pacienteUsuarioDTO.getApellidos(),
+                pacienteUsuarioDTO.getDni(),
+                pacienteUsuarioDTO.getEmail(),
+                pacienteUsuarioDTO.getTelefono(),
+                pacienteUsuarioDTO.getUsername(),
+                usuario
+        );
+        usuarioService.actualizarUsuario(usuario);
+        pacienteService.actualizarPaciente(paciente);
+        model.addAttribute("pacientes", pacienteService.listarPacientes());
+        return "Admin/Pacientes :: pacientesFragment";
+    }
+
+    @PostMapping("EliminarPaciente/{id}")
+    public String ElminarPaciente(@PathVariable Long id, Model model) {
+        Paciente paciente = pacienteService.obtenerPorId(id);
+        Boolean deleted = usuarioService.elminarUsuario(paciente.getUsuario().getId());
+        pacienteService.eliminarPaciente(id);
+        if(deleted) {
+            model.addAttribute("eliminado", "Se eliminó el paciente");
+        } else  {
+            model.addAttribute("error", "Error al eliminar el paciente");
+        }
+        model.addAttribute("pacientes", pacienteService.listarPacientes());
+        return "Admin/Pacientes :: pacientesFragment";
     }
 
 }
