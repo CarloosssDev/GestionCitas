@@ -252,4 +252,4 @@ Para soporte técnico o consultas:
 
 ---
 
-**Nota**: Este es un proyecto educativo desarrollado para el curso de Desarrollo de Aplicaciones Web Integradas (DAWI) en Cibertec.
+**Nota**: Este es un proyecto educativo desarrollado para el curso de Desarrollo de Aplicaciones Web I (DAWI) en Cibertec.
