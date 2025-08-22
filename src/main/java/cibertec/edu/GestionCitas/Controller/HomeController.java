@@ -2,7 +2,6 @@ package cibertec.edu.GestionCitas.Controller;
 
 import cibertec.edu.GestionCitas.Entity.Usuario;
 import cibertec.edu.GestionCitas.Service.UsuarioService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,20 +12,21 @@ public class HomeController {
     private UsuarioService usuarioService;
 
     @GetMapping("/")
-    public String Home(HttpSession httpSession) {
-        insert(httpSession);
+    public String Home() {
+        if (usuarioService.obtenerPorUsername("admin") == null) {
+            insert();
+        }
         return "redirect:/Auth";
     }
 
-    public void insert(HttpSession httpSession) {
-        //Cargamos un usuario Admin
+    public Usuario insert() {
+        // Cargamos un usuario Admin
         Usuario usuario = new Usuario();
         usuario.setNombre("Admin");
         usuario.setEmail("admin@gmail.com");
         usuario.setUsername("admin");
         usuario.setPassword("admin123");
         usuario.setRol(Usuario.RolType.Admin);
-        usuarioService.crearUsuario(usuario);
+        return usuarioService.crearUsuario(usuario);
     }
 }
-
